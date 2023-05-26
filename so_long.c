@@ -55,7 +55,7 @@ void map_checker(t_data *data)
     i = 0;
     while (data->map[i])
     {
-        if (data->width_len != ft_strlen(data->map[i]))
+        if (data->width_len != (int)ft_strlen(data->map[i]))
         {
             // printf(":%s\n",data->map[i]);
             // printf("*%d =%zu\n",data->width_len,ft_strlen(data->map[i]));
@@ -128,7 +128,7 @@ void data_reader(t_data *data, int fd)
         line = get_next_line(fd);
         if (line)
         {
-            if (ft_strlen(line) < data->width_len)
+            if ((int)ft_strlen(line) < data->width_len)
             {
                 perror("too much new lines!\n");
                 exit(1);
@@ -185,7 +185,12 @@ int main(int ac, char **av)
     ber_check(av[1], ".ber");
     data_reader(data, fd);
     map_checker(data);
+    if (path(data) == 0){
+    perror("hhhh0h bslama\n");
+    exit (0);
+    }
     init(data);
+    
     // int i = 0;
     //         // printf("ggg\n");
 
@@ -194,4 +199,53 @@ int main(int ac, char **av)
     //     printf("%s\n",data->map[i]);
     //     i++;
     // }
+}
+int    path(t_data *data)
+{
+    int        x;
+    int        y;
+    int        a;
+    int        i;
+    char    **visited;
+
+    x = data->P_X;
+    y = data->P_Y;
+    a = 0;
+    i = 0;
+    // data->lines_len;
+    // data->width_len;
+    visited = malloc(data->lines_len * sizeof(char *));
+    while (i < data->lines_len)
+    {
+        visited[i] = malloc(data->width_len * sizeof(char));
+        i++;
+    }
+    a = safe(x, y, data, visited);
+    // freeingmachine(visited, NULL, data);
+    return (a);
+}
+
+int    safe(int x, int y, t_data *data, char **visited)
+{
+    if ((data->map[y][x] == '0' || data->map[y][x] == 'C'
+            || data->map[y][x] == 'P' || data->map[y][x] == 'E')
+        && visited[y][x] != 'V')
+    {
+        visited[y][x] = 'V';
+        if (data->map[y][x] == 'E' || data->map[y][x] == 'C')
+        {
+            data->prize++;
+            if (data->prize == data->C_count + 1)
+                return (1);
+        }
+        if (safe(x, y - 1, data, visited) == 1)
+            return (1);
+        if (safe(x, y + 1, data, visited) == 1)
+            return (1);
+        if (safe(x - 1, y, data, visited) == 1)
+            return (1);
+        if (safe(x + 1, y, data, visited) == 1)
+            return (1);
+    }
+    return (0);
 }

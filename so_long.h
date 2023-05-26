@@ -29,6 +29,7 @@ typedef struct s_map
     int P_Y;
     int E_X;
     int E_Y;
+    int prize;
 
     int steps;
     void *mlx;
@@ -58,4 +59,6 @@ void mv_down(t_data *data);
 void mv_left(t_data *data);
 void mv_right(t_data *data);
 void player_on_door(t_data *data);
+int    path(t_data *data);
+int    safe(int x, int y, t_data *data, char **visited);
 #endif
