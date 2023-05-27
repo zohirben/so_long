@@ -1,5 +1,5 @@
 # SRCBonus = main_bonus.c mapcheker_bonus.c player_movement_bonus.c draw_bonus.c out_put_bonus.c utils_bonus.c init_bonus.c monstermovement_bonus.c drawanimation_bonus.c theclock_bonus.c error_bonus.c 
- SRC = so_long.c draw.c movements.c
+ SRC = so_long.c draw.c movements.c so_long_utils.c so_long_utils2.c
  NAME = so_long 
  CC = gcc 
  CFLAGS= -Wall -Wextra -Werror  
@@ -8,23 +8,24 @@
  SUBDIRS = get_next_line printf libft 
  .SILENT: 
  all:	libs $(NAME)  
-  
 		 @echo "\033[104mThe mandatory part is made\033[0m" 
  $(NAME): $(SRC) 
 		 $(CC) $(SRC) $(CFLAGS) $(libraries) -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
   
  libs: $(SUBDIRS) 
 		 @echo "\033[1;32mmaking the libs ...\033[0m" 
-  
 		 $(foreach dir, $(SUBDIRS), $(MAKE) -C $(dir) all;) 
 		 @echo "\033[1;31mit's made \033[0m" 
+
  libsre: $(SUBDIRS) 
 		 $(foreach dir, $(SUBDIRS), $(MAKE) -C $(dir) re;) 
+
  libsclean:	$(SUBDIRS) 
-		 $(foreach dir, $(SUBDIRS), $(MAKE) -C $(dir) fclean;) 
+		 $(foreach dir, $(SUBDIRS), $(MAKE) -C $(dir) fclean;)
+
  clean:	$(SUBDIRS) 
 		 @echo "\033[1;32mcleaning the objects \033[0m" 
-		 $(foreach dir, $(SUBDIRS), $(MAKE) -C $(dir) clean;) 
+		 $(foreach dir, $(SUBDIRS), $(MAKE) -C $(dir) clean;)
 #  bonus: $(SRCBonus) 
   
 		#  @echo "\033[1;32mWork is done !\033[0m" 
