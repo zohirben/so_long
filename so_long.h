@@ -6,7 +6,7 @@
 /*   By: zbenaiss <zbenaiss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:08:41 by zbenaiss          #+#    #+#             */
-/*   Updated: 2023/05/27 17:34:16 by zbenaiss         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:39:31 by zbenaiss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "./libft/libft.h"
 # include "./printf/ft_printf.h"
 # include <mlx.h>
-# include <stdio.h>
 
 enum
 {
